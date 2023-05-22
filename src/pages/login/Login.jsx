@@ -10,7 +10,6 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
-  const {logout} = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   
@@ -20,18 +19,16 @@ const Login = () => {
     await login(email,password);
     if(currentUser.user.admin===true){
      await navigate("/homeadmin")
-    }else{
+    }
+    else if (currentUser.user.isProf===true){
+      await navigate("/homeprof")
+    }
+    else{
      await  navigate("/home")
     }
     
 
    }
-
-  //  const handleLogout = async (event)=>{
-  //   event.preventDefault();
-  //   window.location.reload(false);
-  //   await logout();
-  //  }
  
 
   return (

@@ -1,12 +1,11 @@
-// App.js
-
-import React,{useContext, useEffect} from 'react';
+import React,{useContext} from 'react';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import { AuthContext } from './context/authContext';
 import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
 import HomeEtudiants from './pages/HomeEtudiant/HomeEtudiants';
 import HomeAdmin from './pages/HomeAdmin/HomeAdmin';
+import HomeProf from './pages/HomeProf/HomeProf';
 
 
 const App = () => {
@@ -24,12 +23,6 @@ const App = () => {
     }
   return children;
   };
-
-//  useEffect(()=>{
-//   if(currentUser.user.isAdmin){
-
-//   }
-//  })
 
   const router = createBrowserRouter([
     {
@@ -59,7 +52,15 @@ const App = () => {
             <HomeAdmin />
          </ProtectedRoute>
         )
-        }
+        },
+        {
+        path: "/homeprof",
+        element :(
+        <ProtectedRoute>
+            <HomeProf />
+         </ProtectedRoute>
+        )
+        },
   
       ],
      
