@@ -1,17 +1,31 @@
-// Register.js
-
 import React, { useState } from 'react';
+import axios from 'axios';
 import './register.css';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = (e) => {
+  const navigate = useNavigate()
+  const handleRegister = async (e) => {
     e.preventDefault();
-    // Add your registration logic here
+
+    try {
+      const newUser = {
+        name,
+        email,
+        password
+      };
+
+      const response = await axios.post('http://localhost:8800/api/users/register', newUser);
+      console.log(response.data); 
+      navigate("/")
+    } catch (error) {
+      console.error(error);
+      
+    }
   };
 
   return (
@@ -47,7 +61,7 @@ const Register = () => {
         </div>
         <button type="submit">Register</button>
       </form>
-      <Link to="/">If You Have Acount !</Link>
+      <Link to="/">If You Have An Account!</Link>
     </div>
   );
 };
